@@ -82,7 +82,7 @@ bot_user_agents = [
 MAX_ATTEMPTS = 5
 CODE_EXPIRY_SECONDS = 60  # 1 minute
 
-@app.route("/m", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def captcha():
 
     # init session tracking
